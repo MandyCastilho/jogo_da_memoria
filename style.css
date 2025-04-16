@@ -7,80 +7,109 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .game-container {
     text-align: center;
-    width: 500px;
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .memory-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 25px;
 }
 
 .memory-card {
     width: 100px;
     height: 100px;
-    background-color: #ccc;
-    border-radius: 8px;
+    background: linear-gradient(145deg, #3a3a3a, #2e2e2e);
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
     position: relative;
+    color: transparent;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .memory-card.flipped {
-    background-color: #fff;
+    background: #ffffff;
     transform: rotateY(180deg);
+    color: #333;
 }
 
 .memory-card.matched {
-    background-color: #4caf50;
+    background: #00c853;
+    color: #fff;
+    box-shadow: 0 0 15px #00e676;
 }
 
 .card-text {
     position: absolute;
-    transform: rotateY(180deg); /* Garante que o texto não fique ao contrário */
+    transform: rotateY(180deg);
+    font-weight: bold;
 }
 
 .reset-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 25px;
+    padding: 12px 28px;
     font-size: 16px;
-    background-color: #4caf50;
+    background: #ff4081;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
 }
 
 .reset-btn:hover {
-    background-color: #45a049;
+    background: #f50057;
+    transform: scale(1.05);
 }
 
 .game-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e0e0e0;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 24px;
+    border-radius: 12px;
+    margin-top: 20px;
     font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #f1f1f1;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
 }
+
 
