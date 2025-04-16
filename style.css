@@ -115,31 +115,11 @@ body {
 .win-message {
     background-color: #fd6084;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
     animation: fadeIn 1s ease-in-out;
-}
-
-.win-message button {
-    background-color: #fcd8af;
-    color: #045071;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-.win-message button:hover {
-    background-color: #f8b7a7;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
 }
 
