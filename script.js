@@ -90,7 +90,10 @@ function resetBoard() {
     if (document.querySelectorAll('.matched').length === gameCards.length) {
         clearInterval(timer);
         setTimeout(() => {
-            alert(`🎉 Parabéns! Você venceu em ${moves} jogadas e ${seconds} segundos!`);
+            // Exibindo a mensagem de vitória
+            const winMessage = document.getElementById('win-message');
+            winMessage.innerHTML = `🎉 Parabéns! Você venceu em <strong>${moves}</strong> jogadas e <strong>${seconds}</strong> segundos!`;
+            winMessage.style.display = 'block';
         }, 500);
     }
 }
