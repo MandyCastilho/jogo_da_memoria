@@ -13,11 +13,23 @@ let gameCards = [...cards, ...cards]; // Duplicando as cartas
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let moves = 0;
+let timer;
+let seconds = 0;
+let gameStarted = false;
 
 function initGame() {
-    gameCards = shuffle(gameCards);
+    gameCards = shuffle([...cards, ...cards]);
     const memoryBoard = document.getElementById('memory-board');
     memoryBoard.innerHTML = '';
+    firstCard = secondCard = null;
+    lockBoard = false;
+    moves = 0;
+    seconds = 0;
+    gameStarted = false;
+    updateMoves();
+    updateTimerDisplay();
+    clearInterval(timer);
 
     gameCards.forEach(card => {
         const cardElement = document.createElement('div');
@@ -25,10 +37,9 @@ function initGame() {
         cardElement.dataset.id = card.id;
         cardElement.dataset.value = card.value;
 
-        // Crie um elemento para o texto dentro da carta
         const cardText = document.createElement('div');
         cardText.classList.add('card-text');
-        cardText.textContent = ''; // O texto inicialmente estará vazio
+        cardText.textContent = '';
 
         cardElement.appendChild(cardText);
         cardElement.addEventListener('click', flipCard);
@@ -39,6 +50,11 @@ function initGame() {
 function flipCard() {
     if (lockBoard || this.classList.contains('flipped') || this.classList.contains('matched')) return;
 
+    if (!gameStarted) {
+        startTimer();
+        gameStarted = true;
+    }
+
     const cardText = this.querySelector('.card-text');
     cardText.textContent = this.dataset.value;
     this.classList.add('flipped');
@@ -47,6 +63,8 @@ function flipCard() {
         firstCard = this;
     } else {
         secondCard = this;
+        moves++;
+        updateMoves();
 
         if (firstCard.dataset.value === secondCard.dataset.value) {
             firstCard.classList.add('matched');
@@ -70,8 +88,9 @@ function resetBoard() {
     lockBoard = false;
 
     if (document.querySelectorAll('.matched').length === gameCards.length) {
+        clearInterval(timer);
         setTimeout(() => {
-            alert('Você venceu!');
+            alert(`🎉 Parabéns! Você venceu em ${moves} jogadas e ${seconds} segundos!`);
         }, 500);
     }
 }
@@ -83,6 +102,25 @@ function shuffle(array) {
     }
     return array;
 }
+
+function updateMoves() {
+    const movesDisplay = document.getElementById('moves-count');
+    if (movesDisplay) movesDisplay.textContent = `Jogadas: ${moves}`;
+}
+
+function startTimer() {
+    timer = setInterval(() => {
+        seconds++;
+        updateTimerDisplay();
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const timerDisplay = document.getElementById('timer');
+    if (timerDisplay) timerDisplay.textContent = `Tempo: ${seconds}s`;
+}
+
+document.getElementById('restart-btn').addEventListener('click', initGame);
 
 // Inicializando o jogo quando a página carrega
 window.onload = initGame;
